@@ -102,6 +102,17 @@ func (p *Pattern) realize(i int, params Params) RealizedStep {
 		degree = int(randf(s, 4)*float32(span)) % len(sc)
 	}
 
+	// Sequencer //
+	type Sequencer struct {
+		port    *MidiPort
+		params  Params
+		pattern Pattern
+
+		playing      bool // Is your sequencer running? Better go catch it!
+		stepIndex    int  // Current step in the pattern
+		soundingNote int  // What note is currently online?
+	}
+
 	root := 36 + params.Key // C2 is 36 in MIDI
 	out.Note = clampInt(root+sc[degree]+12*octave(s, params), 0, 127)
 	out.Accent = randf(s, 7) < params.AccentProb
