@@ -127,6 +127,17 @@ func clampInt(value, low, high int) int {
 	return value
 }
 
+type MidiPort struct {
+	live bool
+}
+
+func (m *MidiPort) send(data []byte) {
+	if !m.live {
+		fmt.Printf("MIDI: % X\n", data)
+		return
+	}
+}
+
 type PotBank struct {
 	hardware bool
 	// storage for simulated pot values
