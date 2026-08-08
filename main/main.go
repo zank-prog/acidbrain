@@ -127,6 +127,7 @@ func clampInt(value, low, high int) int {
 	return value
 }
 
+// Midi output port
 type MidiPort struct {
 	live bool
 }
@@ -136,6 +137,15 @@ func (m *MidiPort) send(data []byte) {
 		fmt.Printf("MIDI: % X\n", data)
 		return
 	}
+}
+
+func (m *MidiPort) NoteOn(note, velocity, channel int) {
+	msg := []byte{
+		byte(0x90 | (channel & 0x0F)),
+		byte(note & 0x7F),
+		byte(velocity & 0x7F),
+	}
+	m.send(msg)
 }
 
 type PotBank struct {
@@ -191,6 +201,8 @@ func main() {
 	readings := bank.Read()
 	params := mapPots(readings[:]) // slice that covers the entire array
 	pat := Pattern{}
+	port := MidiPort{}
+	port.NoteOn(45, 100, 0)
 	pat.reseed(12345)
 	for i := 0; i < params.Steps; i++ {
 		step := pat.realize(i, params)
