@@ -139,11 +139,21 @@ func (m *MidiPort) send(data []byte) {
 	}
 }
 
+// Note functionality
 func (m *MidiPort) NoteOn(note, velocity, channel int) {
 	msg := []byte{
 		byte(0x90 | (channel & 0x0F)),
 		byte(note & 0x7F),
 		byte(velocity & 0x7F),
+	}
+	m.send(msg)
+}
+
+func (m *MidiPort) NoteOff(note, channel int) {
+	msg := []byte{
+		byte(0x80 | (channel & 0x0F)),
+		byte(note & 0x7F),
+		0,
 	}
 	m.send(msg)
 }
@@ -193,20 +203,35 @@ func mapPots(r []float32) Params { // readings, short lived var
 	return p
 }
 func main() {
-	fmt.Println("AcidBrain is online!")
+	fmt.Println("☢ AcidBrain is online! ☢")
 
+	// Simulate pot readings //
 	bank := PotBank{}
 	bank.Simulate(3, 0.75)
+	bank.Simulate(2, 0.5)
+	bank.Simulate(4, 0.6)
+	bank.Simulate(6, 0.25)
 
+	// Read the pot values and map them to Params //
 	readings := bank.Read()
 	params := mapPots(readings[:]) // slice that covers the entire array
-	pat := Pattern{}
+
+	// Build the pattern and the Midi port //
 	port := MidiPort{}
-	port.NoteOn(45, 100, 0)
+	pat := Pattern{}
 	pat.reseed(12345)
+
+	// Play the pattern //
 	for i := 0; i < params.Steps; i++ {
 		step := pat.realize(i, params)
-		fmt.Printf("step %2d: %+v\n", i, step)
+		if step.Active {
+			port.NoteOn(step.Note, 100, 0)
+			port.NoteOff(step.Note, 0)
+		}
 	}
-	fmt.Printf("%+v\n", params)
+	// Debug output //
+	// port.NoteOn(45, 100, 0)
+	// port.NoteOff(45, 0)
+	// fmt.Printf("step %2d: %+v\n", i, step)
+	// fmt.Printf("%+v\n", params)
 }
