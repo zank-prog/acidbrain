@@ -118,6 +118,9 @@ type Sequencer struct {
 	playing      bool // Is your sequencer running? Better go catch it!
 	stepIndex    int  // Current step in the pattern
 	soundingNote int  // What note is currently online?
+
+	// Live updates, declare channel field
+	paramUpdates chan Params
 }
 
 // Turn off old note, advance to next step, and play new note
@@ -144,6 +147,12 @@ func (s *Sequencer) advance() {
 // Clock loop
 func (s *Sequencer) runClock() {
 	for {
+		select {
+		case newParams := <-s.paramUpdates:
+			s.params = newParams
+		default:
+		}
+
 		stepDuration := time.Duration(60000/s.params.Bpm/4) * time.Millisecond
 		if s.playing {
 			s.advance()
@@ -271,11 +280,19 @@ func main() {
 		params:       params,
 		playing:      true,
 		soundingNote: -1,
+		paramUpdates: make(chan Params, 1),
 	}
 	// Launch clock //
 	go seq.runClock()
 	// Keep main alive //
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
+
+	// Live knob manipulation.
+	newParams := params
+	newParams.Complexity = 1.0
+	seq.paramUpdates <- newParams
+
+	time.Sleep(3 * time.Second) // hear the changed pattern
 
 	// Play the pattern - deprecated due to sequencer //
 	// for i := 0; i < params.Steps; i++ {
