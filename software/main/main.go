@@ -132,6 +132,20 @@ type Sequencer struct {
 
 	// Drone
 	drone bool
+
+	// Pattern generation
+	seedCounter uint32
+}
+
+func NewSequencer(port *MidiPort) *Sequencer {
+	s := &Sequencer{
+		port:         port,
+		playing:      true,
+		soundingNote: -1,
+		paramUpdates: make(chan Params, 1),
+	}
+	s.pattern.reseed(12345)
+	return s
 }
 
 // Turn off old note, advance to next step, and play new note
@@ -219,6 +233,11 @@ func (s *Sequencer) ToggleDrone() {
 			s.soundingNote = -1
 		}
 	}
+}
+
+func (s *Sequencer) Regenerate() {
+	s.seedCounter++
+	s.pattern.reseed(s.seedCounter)
 }
 
 // Clock loop
@@ -366,16 +385,19 @@ func main() {
 	port := MidiPort{}
 	pat := Pattern{}
 	pat.reseed(12345)
+	seq := NewSequencer(&port)
+	seq.params = params
 
-	// Build the sequencer //
-	seq := &Sequencer{
-		port:         &port,
-		pattern:      pat,
-		params:       params,
-		playing:      true,
-		soundingNote: -1,
-		paramUpdates: make(chan Params, 1),
-	}
+	// Build the sequencer - Deprecated //
+	//seq := &Sequencer{
+	//	port:         &port,
+	///	pattern:      pat,
+	//	params:       params,
+	//	playing:      true,
+	//	soundingNote: -1,
+	//	paramUpdates: make(chan Params, 1),
+	//}
+
 	// Launch clock //
 	go seq.runClock()
 
