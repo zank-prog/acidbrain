@@ -284,15 +284,23 @@ func main() {
 	}
 	// Launch clock //
 	go seq.runClock()
+
+	// MAIN LOOP: read knobs, update the sequencer forver! //
+	for {
+		readings := bank.Read()
+		latest := mapPots(readings[:])
+		seq.paramUpdates <- latest
+		time.Sleep(50 * time.Millisecond)
+	}
 	// Keep main alive //
-	time.Sleep(2 * time.Second)
+	// time.Sleep(2 * time.Second)
 
 	// Live knob manipulation.
-	newParams := params
-	newParams.Complexity = 1.0
-	seq.paramUpdates <- newParams
+	// newParams := params
+	// newParams.Complexity = 1.0
+	// seq.paramUpdates <- newParams
 
-	time.Sleep(3 * time.Second) // hear the changed pattern
+	// time.Sleep(3 * time.Second) // hear the changed pattern
 
 	// Play the pattern - deprecated due to sequencer //
 	// for i := 0; i < params.Steps; i++ {
