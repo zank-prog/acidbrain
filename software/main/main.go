@@ -129,6 +129,9 @@ type Sequencer struct {
 
 	// Slide
 	prevSlide bool
+
+	// Drone
+	drone bool
 }
 
 // Turn off old note, advance to next step, and play new note
@@ -191,6 +194,33 @@ func (s *Sequencer) checkNoteOff() {
 	}
 }
 
+// Play / Pause / Drone //
+func (s *Sequencer) Play() {
+	s.playing = true
+}
+
+func (s *Sequencer) Pause() {
+	s.playing = false
+	if s.soundingNote >= 0 {
+		s.port.NoteOff(s.soundingNote, 0)
+		s.soundingNote = -1
+	}
+}
+
+func (s *Sequencer) ToggleDrone() {
+	s.drone = !s.drone
+	if s.drone {
+		note := 36 + s.params.Key
+		s.port.NoteOn(note, 100, 0)
+		s.soundingNote = note
+	} else {
+		if s.soundingNote >= 0 {
+			s.port.NoteOff(s.soundingNote, 0)
+			s.soundingNote = -1
+		}
+	}
+}
+
 // Clock loop
 func (s *Sequencer) runClock() {
 	for {
@@ -202,12 +232,11 @@ func (s *Sequencer) runClock() {
 
 		pulseDuration := time.Duration(60000/s.params.Bpm/24) * time.Millisecond
 
-		if s.playing {
+		if s.playing && !s.drone {
 			if s.pulseInStep == 0 {
 				s.startStep()
 			}
 			s.checkNoteOff()
-
 			s.globalPulse++
 			s.pulseInStep = (s.pulseInStep + 1) % 6
 		}
@@ -259,6 +288,16 @@ func (m *MidiPort) NoteOff(note, channel int) {
 	msg := []byte{
 		byte(0x80 | (channel & 0x0F)),
 		byte(note & 0x7F),
+		0,
+	}
+	m.send(msg)
+}
+
+// Safely kill notes //
+func (m *MidiPort) AllNotesOff(channel int) {
+	msg := []byte{
+		byte(0xB0 | (channel & 0x0F)),
+		123,
 		0,
 	}
 	m.send(msg)
