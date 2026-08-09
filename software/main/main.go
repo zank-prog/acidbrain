@@ -101,23 +101,43 @@ func (p *Pattern) realize(i int, params Params) RealizedStep {
 		span := 1 + int(randf(s, 3)*float32(len(sc)-1))
 		degree = int(randf(s, 4)*float32(span)) % len(sc)
 	}
-
-	// Sequencer //
-	type Sequencer struct {
-		port    *MidiPort
-		params  Params
-		pattern Pattern
-
-		playing      bool // Is your sequencer running? Better go catch it!
-		stepIndex    int  // Current step in the pattern
-		soundingNote int  // What note is currently online?
-	}
-
-	root := 36 + params.Key // C2 is 36 in MIDI
+	root := 36 + params.Key
 	out.Note = clampInt(root+sc[degree]+12*octave(s, params), 0, 127)
 	out.Accent = randf(s, 7) < params.AccentProb
 	out.Slide = randf(s, 8) < params.SlideProb
 	return out
+}
+
+// Sequencer //
+type Sequencer struct {
+	port    *MidiPort
+	params  Params
+	pattern Pattern
+
+	playing      bool // Is your sequencer running? Better go catch it!
+	stepIndex    int  // Current step in the pattern
+	soundingNote int  // What note is currently online?
+}
+
+// Turn off old note, advance to next step, and play new note
+func (s *Sequencer) advance() {
+	// Turn off old note
+	if s.soundingNote >= 0 {
+		s.port.NoteOff(s.soundingNote, 0)
+		s.soundingNote = -1
+	}
+	// Play new note
+	step := s.pattern.realize(s.stepIndex, s.params)
+	if step.Active {
+		velocity := 100
+		if step.Accent {
+			velocity = 127
+		}
+		s.port.NoteOn(step.Note, velocity, 0)
+		s.soundingNote = step.Note
+	}
+	// Advance to next step
+	s.stepIndex = (s.stepIndex + 1) % s.params.Steps
 }
 
 func octave(s uint32, params Params) int {
