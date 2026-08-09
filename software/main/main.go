@@ -121,16 +121,36 @@ type Sequencer struct {
 
 	// Live updates, declare channel field
 	paramUpdates chan Params
+
+	// Pulse tracking
+	pulseInStep  int
+	noteOffPulse int
+	globalPulse  int
 }
 
 // Turn off old note, advance to next step, and play new note
-func (s *Sequencer) advance() {
-	// Turn off old note
-	if s.soundingNote >= 0 {
-		s.port.NoteOff(s.soundingNote, 0)
-		s.soundingNote = -1
-	}
-	// Play new note
+// Deprecated //
+//func (s *Sequencer) advance() {
+//	// Turn off old note
+//	if s.soundingNote >= 0 {
+//		s.port.NoteOff(s.soundingNote, 0)
+//		s.soundingNote = -1
+//	}
+//	// Play new note
+//	step := s.pattern.realize(s.stepIndex, s.params)
+//	if step.Active {
+//		velocity := 100
+//		if step.Accent {
+//			velocity = 127
+//		}
+//		s.port.NoteOn(step.Note, velocity, 0)
+//		s.soundingNote = step.Note
+//	}
+//	// Advance to next step
+//	s.stepIndex = (s.stepIndex + 1) % s.params.Steps
+//}
+
+func (s *Sequencer) startStep() {
 	step := s.pattern.realize(s.stepIndex, s.params)
 	if step.Active {
 		velocity := 100
@@ -139,9 +159,20 @@ func (s *Sequencer) advance() {
 		}
 		s.port.NoteOn(step.Note, velocity, 0)
 		s.soundingNote = step.Note
+
+		gatePulses := int(s.params.Gate * 6)
+		if gatePulses < 1 {
+			gatePulses = 1
+		}
+		s.noteOffPulse = s.globalPulse + gatePulses
 	}
-	// Advance to next step
-	s.stepIndex = (s.stepIndex + 1) % s.params.Steps
+}
+
+func (s *Sequencer) checkNoteOff() {
+	if s.soundingNote >= 0 && s.globalPulse >= s.noteOffPulse {
+		s.port.NoteOff(s.soundingNote, 0)
+		s.soundingNote = -1
+	}
 }
 
 // Clock loop
@@ -153,11 +184,18 @@ func (s *Sequencer) runClock() {
 		default:
 		}
 
-		stepDuration := time.Duration(60000/s.params.Bpm/4) * time.Millisecond
+		pulseDuration := time.Duration(60000/s.params.Bpm/24) * time.Millisecond
+
 		if s.playing {
-			s.advance()
+			if s.pulseInStep == 0 {
+				s.startStep()
+			}
+			s.checkNoteOff()
+
+			s.globalPulse++
+			s.pulseInStep = (s.pulseInStep + 1) % 6
 		}
-		time.Sleep(stepDuration)
+		time.Sleep(pulseDuration)
 	}
 }
 
@@ -292,6 +330,8 @@ func main() {
 		seq.paramUpdates <- latest
 		time.Sleep(50 * time.Millisecond)
 	}
+
+	// vvv DEPRICATED vvv //
 	// Keep main alive //
 	// time.Sleep(2 * time.Second)
 
