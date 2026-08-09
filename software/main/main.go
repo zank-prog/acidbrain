@@ -126,10 +126,13 @@ type Sequencer struct {
 	pulseInStep  int
 	noteOffPulse int
 	globalPulse  int
+
+	// Slide
+	prevSlide bool
 }
 
 // Turn off old note, advance to next step, and play new note
-// Deprecated //
+// Deprecated for startStep //
 //func (s *Sequencer) advance() {
 //	// Turn off old note
 //	if s.soundingNote >= 0 {
@@ -157,8 +160,19 @@ func (s *Sequencer) startStep() {
 		if step.Accent {
 			velocity = 127
 		}
-		s.port.NoteOn(step.Note, velocity, 0)
+
+		if s.soundingNote >= 0 && s.prevSlide {
+			s.port.NoteOn(step.Note, velocity, 0)
+			s.port.NoteOff(s.soundingNote, 0)
+		} else {
+			if s.soundingNote >= 0 {
+				s.port.NoteOff(s.soundingNote, 0)
+			}
+			s.port.NoteOn(step.Note, velocity, 0)
+		}
+
 		s.soundingNote = step.Note
+		s.prevSlide = step.Slide
 
 		gatePulses := int(s.params.Gate * 6)
 		if gatePulses < 1 {
@@ -166,6 +180,8 @@ func (s *Sequencer) startStep() {
 		}
 		s.noteOffPulse = s.globalPulse + gatePulses
 	}
+
+	s.stepIndex = (s.stepIndex + 1) % s.params.Steps
 }
 
 func (s *Sequencer) checkNoteOff() {
@@ -301,6 +317,7 @@ func main() {
 	bank.Simulate(2, 0.5)
 	bank.Simulate(4, 0.6)
 	bank.Simulate(6, 0.25)
+	bank.Simulate(8, 0.08)
 
 	// Read the pot values and map them to Params //
 	readings := bank.Read()
