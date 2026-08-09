@@ -13,6 +13,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // Declaring a variable: note names!
@@ -140,6 +141,17 @@ func (s *Sequencer) advance() {
 	s.stepIndex = (s.stepIndex + 1) % s.params.Steps
 }
 
+// Clock loop
+func (s *Sequencer) runClock() {
+	for {
+		stepDuration := time.Duration(60000/s.params.Bpm/4) * time.Millisecond
+		if s.playing {
+			s.advance()
+		}
+		time.Sleep(stepDuration)
+	}
+}
+
 func octave(s uint32, params Params) int {
 	if params.OctaveSpan > 1 && randf(s, 5) < params.Complexity*0.6 {
 		return 1 + int(randf(s, 6)*float32(params.OctaveSpan-1))
@@ -252,14 +264,26 @@ func main() {
 	pat := Pattern{}
 	pat.reseed(12345)
 
-	// Play the pattern //
-	for i := 0; i < params.Steps; i++ {
-		step := pat.realize(i, params)
-		if step.Active {
-			port.NoteOn(step.Note, 100, 0)
-			port.NoteOff(step.Note, 0)
-		}
+	// Build the sequencer //
+	seq := &Sequencer{
+		port:         &port,
+		pattern:      pat,
+		params:       params,
+		playing:      true,
+		soundingNote: -1,
 	}
+	// Launch clock //
+	go seq.runClock()
+	// Keep main alive //
+	time.Sleep(5 * time.Second)
+
+	// Play the pattern - deprecated due to sequencer //
+	// for i := 0; i < params.Steps; i++ {
+	//	step := pat.realize(i, params)
+	//	if step.Active {
+	//		port.NoteOn(step.Note, 100, 0)
+	//		port.NoteOff(step.Note, 0)
+	//	}
 	// Debug output //
 	// port.NoteOn(45, 100, 0)
 	// port.NoteOff(45, 0)
