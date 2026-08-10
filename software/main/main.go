@@ -16,7 +16,6 @@ import (
 	"time"
 
 	"go.bug.st/serial"
-	"periph.io/x/host/v3/serial"
 )
 
 // Declaring a variable: note names!
@@ -401,10 +400,10 @@ func main() {
 	params := mapPots(readings[:]) // slice that covers the entire array
 
 	// Build the pattern and the Midi port //
-	port := MidiPort{}
-	pat := Pattern{}
-	pat.reseed(12345)
-	seq := NewSequencer(&port)
+	port := NewMidiPort("/dev/serial0")
+//	pat := Pattern{} // Deprecated
+//	pat.reseed(12345) // Deprecated
+	seq := NewSequencer(port)
 	seq.params = params
 
 	// Build the sequencer - Deprecated //
