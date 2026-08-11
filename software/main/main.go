@@ -309,6 +309,10 @@ func (m *MidiPort) send(data []byte) {
 		fmt.Printf("MIDI: % X\n", data)
 		return
 	}
+	_, err := m.conn.Write(data)
+	if err != nil {
+		fmt.Print("[midi] write failed: %v\n", err)
+	}
 }
 
 // Note functionality
@@ -401,8 +405,8 @@ func main() {
 
 	// Build the pattern and the Midi port //
 	port := NewMidiPort("/dev/serial0")
-//	pat := Pattern{} // Deprecated
-//	pat.reseed(12345) // Deprecated
+	//	pat := Pattern{} // Deprecated
+	//	pat.reseed(12345) // Deprecated
 	seq := NewSequencer(port)
 	seq.params = params
 
