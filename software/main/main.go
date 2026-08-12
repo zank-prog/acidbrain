@@ -468,7 +468,7 @@ func main() {
 	fmt.Println("☢ AcidBrain is online! ☢")
 
 	// Simulate pot readings //
-	bank := PotBank{}
+	bank := NewPotBank()
 	bank.Simulate(3, 0.75)
 	bank.Simulate(2, 0.5)
 	bank.Simulate(4, 0.6)
