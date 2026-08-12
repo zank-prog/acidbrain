@@ -16,6 +16,10 @@ import (
 	"time"
 
 	"go.bug.st/serial"
+	"periph.io/x/conn/v3/physic"
+	"periph.io/x/conn/v3/spi"
+	"periph.io/x/conn/v3/spi/spireg"
+	"periph.io/x/host/v3"
 )
 
 // Declaring a variable: note names!
@@ -347,12 +351,84 @@ func (m *MidiPort) AllNotesOff(channel int) {
 type PotBank struct {
 	hardware bool
 	// storage for simulated pot values
-	sim [10]float32
+	sim    [10]float32
+	smooth [10]float32
+
+	connA spi.Conn
+	connB spi.Conn
+	portA spi.PortCloser
+	portB spi.PortCloser
+}
+
+func NewPotBank() *PotBank {
+	b := &PotBank{hardware: false}
+	b.sim = [10]float32{0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5}
+
+	if _, err := host.Init(); err != nil {
+		fmt.Printf("[pots] host init failed, simulating: %v\n", err)
+		return b
+	}
+
+	portA, err := spireg.Open("/dev/spidev0.0")
+	if err != nil {
+		fmt.Printf("[pots] chip A unavailable, simulating: %v\n", err)
+		return b
+	}
+	connA, err := portA.Connect(1350*physic.KiloHertz, spi.Mode0, 8)
+	if err != nil {
+		fmt.Printf("[pots] chip A connect failed, simulating: %v\n", err)
+		portA.Close()
+		return b
+	}
+
+	portB, err := spireg.Open("/dev/spidev0.1")
+	if err != nil {
+		fmt.Printf("[pots] chip B unavailable, simulating: %v\n", err)
+		portA.Close()
+		return b
+	}
+	connB, err := portB.Connect(1350*physic.KiloHertz, spi.Mode0, 8)
+	if err != nil {
+		fmt.Printf("[pots] chip B connect failed, simulating: %v\n", err)
+		portA.Close()
+		portB.Close()
+		return b
+	}
+
+	b.portA, b.connA = portA, connA
+	b.portB, b.connB = portB, connB
+	b.hardware = true
+	return b
 }
 
 // Read the pot values, either from hardware or simulated
 func (b *PotBank) Read() [10]float32 {
-	return b.sim
+	var out [10]float32
+	for i := 0; i < 10; i++ {
+		var v float32
+		if b.hardware {
+			if i < 8 {
+				v = b.readChannel(b.connA, i)
+			} else {
+				v = b.readChannel(b.connB, i-8)
+			}
+		} else {
+			v = b.sim[i]
+		}
+		b.smooth[i] += 0.25 * (v - b.smooth[i])
+		out[i] = b.smooth[i]
+	}
+	return out
+}
+
+func (b *PotBank) readChannel(conn spi.Conn, channel int) float32 {
+	cmd := []byte{0x01, byte((8 + channel) << 4), 0x00}
+	reply := make([]byte, 3)
+	if err := conn.Tx(cmd, reply); err != nil {
+		return 0.5
+	}
+	value := int(reply[1]&0x03)<<8 | int(reply[2])
+	return float32(value) / 1023.0
 }
 
 // Simulate a pot value, for testing without hardware
