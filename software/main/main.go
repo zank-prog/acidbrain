@@ -13,6 +13,9 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"go.bug.st/serial"
@@ -486,18 +489,18 @@ func main() {
 	seq := NewSequencer(port)
 	seq.params = params
 
-	// Build the sequencer - Deprecated //
-	//seq := &Sequencer{
-	//	port:         &port,
-	///	pattern:      pat,
-	//	params:       params,
-	//	playing:      true,
-	//	soundingNote: -1,
-	//	paramUpdates: make(chan Params, 1),
-	//}
-
 	// Launch clock //
 	go seq.runClock()
+
+	// Clean Shutdown
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-sigChan
+		fmt.Println("\nShutting down, the ACIDBRAIN sleeps...")
+		port.AllNotesOff(0)
+		os.Exit(0)
+	}() // Calls the function
 
 	// MAIN LOOP: read knobs, update the sequencer forver! //
 	for {
