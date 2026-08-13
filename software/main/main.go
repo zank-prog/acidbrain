@@ -15,7 +15,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"syscall"
 	"time"
 
 	"go.bug.st/serial"
@@ -494,43 +493,24 @@ func main() {
 
 	// Clean Shutdown
 	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(sigChan, os.Interrupt)
 	go func() {
 		<-sigChan
 		fmt.Println("\nShutting down, the ACIDBRAIN sleeps...")
 		port.AllNotesOff(0)
 		os.Exit(0)
-	}() // Calls the function
+	}()
 
-	// MAIN LOOP: read knobs, update the sequencer forver! //
-	for {
-		readings := bank.Read()
-		latest := mapPots(readings[:])
-		seq.paramUpdates <- latest
-		time.Sleep(50 * time.Millisecond)
-	}
+	// Pot-reading loop
+	go func() {
+		for {
+			readings := bank.Read()
+			latest := mapPots(readings[:])
+			seq.paramUpdates <- latest
+			time.Sleep(50 * time.Millisecond)
+		}
+	}()
 
-	// vvv DEPRICATED vvv //
-	// Keep main alive //
-	// time.Sleep(2 * time.Second)
-
-	// Live knob manipulation.
-	// newParams := params
-	// newParams.Complexity = 1.0
-	// seq.paramUpdates <- newParams
-
-	// time.Sleep(3 * time.Second) // hear the changed pattern
-
-	// Play the pattern - deprecated due to sequencer //
-	// for i := 0; i < params.Steps; i++ {
-	//	step := pat.realize(i, params)
-	//	if step.Active {
-	//		port.NoteOn(step.Note, 100, 0)
-	//		port.NoteOff(step.Note, 0)
-	//	}
-	// Debug output //
-	// port.NoteOn(45, 100, 0)
-	// port.NoteOff(45, 0)
-	// fmt.Printf("step %2d: %+v\n", i, step)
-	// fmt.Printf("%+v\n", params)
+	// GUI runs on the main goroutine and blocks until the window closes
+	runUI()
 }
