@@ -15,6 +15,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"sync"
 	"time"
 
 	"go.bug.st/serial"
@@ -143,6 +144,16 @@ type Sequencer struct {
 
 	// Pattern generation
 	seedCounter uint32
+
+	// Mutex
+	mu sync.Mutex
+}
+
+// Snapshot for playhead
+func (s *Sequencer) Snapshot() (Pattern, Params, int) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.pattern, s.params, s.stepIndex // current step for the playhead
 }
 
 func NewSequencer(port *MidiPort) *Sequencer {
@@ -512,5 +523,5 @@ func main() {
 	}()
 
 	// GUI runs on the main goroutine and blocks until the window closes
-	runUI()
+	runUI(seq)
 }
