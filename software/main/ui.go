@@ -27,29 +27,38 @@ func runUI(seq *Sequencer) {
 	//	}
 
 	//	trackerText := buildTrackerText(samplePattern, sampleParams)
-	label := widget.NewLabel("")
-	label.TextStyle = fyne.TextStyle{Monospace: true}
+	trackerLabel := widget.NewLabel("")
+	trackerLabel.TextStyle = fyne.TextStyle{Monospace: true}
 
-	content := container.NewVBox(label)
+	potLabel := widget.NewLabel("")
+	potLabel.TextStyle = fyne.TextStyle{Monospace: true}
+
+	content := container.NewBorder(
+		nil,          // top
+		potLabel,     // bottom  ← pot values pinned here
+		nil,          // left
+		nil,          // right
+		trackerLabel, // center  ← tracker fills the rest
+	)
 
 	window.SetContent(content)
-	window.Resize(fyne.NewSize(400, 600))
+	window.Resize(fyne.NewSize(480, 640))
 
 	// Live update loop, 50ms
 	go func() {
 		for {
 			pattern, params, step := seq.Snapshot()
-			text := buildTrackerText(pattern, params, step)
-
+			trackerText := buildTrackerText(pattern, params, step)
+			potText := buildPotText(params)
 			fyne.Do(func() {
-				label.SetText(text)
+				trackerLabel.SetText(trackerText)
+				potLabel.SetText(potText)
 			})
 
 			time.Sleep(50 * time.Millisecond)
 		}
 	}()
 	window.ShowAndRun()
-
 }
 
 func noteName(midiNote int) string {
@@ -86,4 +95,33 @@ func buildTrackerText(pattern Pattern, params Params, currentStep int) string {
 		}
 	}
 	return text
+}
+
+func buildPotText(params Params) string {
+	keyNames := []string{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"}
+	return fmt.Sprintf(
+		"--------------------\n"+
+			"KEY    %s\n"+
+			"SCALE  %s\n"+
+			"STEPS  %d\n"+
+			"DENS   %.2f\n"+
+			"CPLX   %.2f\n"+
+			"SWING  %.2f\n"+
+			"ACC    %.2f\n"+
+			"SLIDE  %.2f\n"+
+			"GATE   %.2f\n"+
+			"OCT    %d\n"+
+			"BPM    %.0f",
+		keyNames[params.Key%12],
+		scales()[params.ScaleIdx].Name,
+		params.Steps,
+		params.Density,
+		params.Complexity,
+		params.Swing,
+		params.AccentProb,
+		params.SlideProb,
+		params.Gate,
+		params.OctaveSpan,
+		params.Bpm,
+	)
 }
