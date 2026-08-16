@@ -227,7 +227,7 @@ func (s *Sequencer) checkNoteOff() {
 	}
 }
 
-// Play / Pause / Drone //
+// Play / Pause / Stop / Drone //
 func (s *Sequencer) Play() {
 	s.playing = true
 }
@@ -238,6 +238,36 @@ func (s *Sequencer) Pause() {
 		s.port.NoteOff(s.soundingNote, 0)
 		s.soundingNote = -1
 	}
+}
+
+func (s *Sequencer) TogglePlay() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if s.playing {
+		// if playing, then pause
+		s.playing = false
+		if s.soundingNote >= 0 {
+			s.port.NoteOff(s.soundingNote, 0)
+			s.soundingNote = -1
+		}
+	} else {
+		// if paused, then play
+		s.playing = true
+	}
+
+}
+
+func (s *Sequencer) Stop() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	s.playing = false
+	if s.soundingNote >= 0 {
+		s.port.NoteOff(s.soundingNote, 0)
+		s.soundingNote = -1
+	}
+	s.stepIndex = 0
+	s.pulseInStep = 0
 }
 
 func (s *Sequencer) ToggleDrone() {
@@ -479,13 +509,15 @@ func mapPots(r []float32) Params { // readings, short lived var
 }
 func main() {
 	fmt.Println("☢ AcidBrain is online! ☢")
-
 	// Simulate pot readings //
 	bank := NewPotBank()
-	bank.Simulate(3, 0.75)
-	bank.Simulate(2, 0.5)
-	bank.Simulate(4, 0.6)
+	bank.Simulate(1, 0.82)
+	bank.Simulate(2, 0.38)
+	bank.Simulate(3, 0.96)
+	bank.Simulate(4, 0.10)
+	bank.Simulate(5, 0.05)
 	bank.Simulate(6, 0.25)
+	bank.Simulate(7, 0.15)
 	bank.Simulate(8, 0.08)
 
 	// Read the pot values and map them to Params //

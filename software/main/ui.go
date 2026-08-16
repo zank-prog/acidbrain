@@ -33,9 +33,18 @@ func runUI(seq *Sequencer) {
 	potLabel := widget.NewLabel("")
 	potLabel.TextStyle = fyne.TextStyle{Monospace: true}
 
+	// Buttons
+	playPauseBtn := widget.NewButton("PLAY/PAUSE", func() { seq.TogglePlay() })
+	stopBtn := widget.NewButton("CEASE", func() { seq.Stop() })
+	regenBtn := widget.NewButton("NEW", func() { seq.Regenerate() })
+	droneBtn := widget.NewButton("DRONE", func() { seq.ToggleDrone() })
+	buttons := container.NewHBox(regenBtn, playPauseBtn, stopBtn, droneBtn)
+
+	bottomArea := container.NewVBox(potLabel, buttons)
+
 	content := container.NewBorder(
 		nil,          // top
-		potLabel,     // bottom  ← pot values pinned here
+		bottomArea,   // bottom  ← pot values pinned here
 		nil,          // left
 		nil,          // right
 		trackerLabel, // center  ← tracker fills the rest
@@ -58,7 +67,9 @@ func runUI(seq *Sequencer) {
 			time.Sleep(50 * time.Millisecond)
 		}
 	}()
+
 	window.ShowAndRun()
+
 }
 
 func noteName(midiNote int) string {
