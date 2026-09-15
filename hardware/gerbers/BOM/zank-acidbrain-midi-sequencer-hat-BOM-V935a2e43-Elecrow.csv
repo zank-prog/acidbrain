@@ -1,0 +1,247 @@
+﻿*Reference,*Manufacturer Part number,*QTY,*Original,Description,Purchase Link
+"C1, C2, C4","","3","","A generic fixed capacitor ideal for rapid circuit topology development. You can choose between polarized and non-polarized types, its symbol and the footprint will automatically adapt based on your selection. Supported options include standard SMD sizes for ceramic capacitors (e.g., 0402, 0603, 0805), SMD sizes for aluminum electrolytic capacitors, and through-hole footprints for polarized capacitors. 
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard capacitor values: 1.0pF, 10pF, 100pF, 1000pF, 0.01uF, 0.1uF, 1.0uF, 10uF, 100uF, 1000uF, 10000uF
+1.1pF, 11pF, 110pF, 1100pF
+1.2pF, 12pF, 120pF, 1200pF
+1.3pF, 13pF, 130pF, 1300pF
+1.5pF, 15pF, 150pF, 1500pF, 0.015uF, 0.15uF, 1.5uF, 15uF, 150uF, 1500uF
+1.6pF, 16pF, 160pF, 1600pF
+1.8pF, 18pF, 180pF, 1800pF
+2.0pF, 20pF, 200pF, 2000pF
+2.2pF, 22pF, 220pF, 2200pF, 0.022uF, 0.22uF, 2.2uF, 22uF, 220uF, 2200uF
+2.4pF, 24pF, 240pF, 2400pF
+2.7pF, 27pF, 270pF, 2700pF
+3.0pF, 30pF, 300pF, 3000pF
+3.3pF, 33pF, 330pF, 3300pF, 0.033uF, 0.33uF, 3.3uF, 33uF, 330uF, 3300uF
+3.6pF, 36pF, 360pF, 3600pF
+3.9pF, 39pF, 390pF, 3900pF
+4.3pF, 43pF, 430pF, 4300pF
+4.7pF, 47pF, 470pF, 4700pF, 0.047uF, 0.47uF, 4.7uF, 47uF, 470uF, 4700uF
+5.1pF, 51pF, 510pF, 5100pF
+5.6pF, 56pF, 560pF, 5600pF
+6.2pF, 62pF, 620pF, 6200pF
+6.8pF, 68pF, 680pF, 6800pF, 0.068uF, 0.68uF, 6.8uF, 68uF, 680uF, 6800uF
+7.5pF, 75pF, 750pF, 7500pF
+8.2pF, 82pF, 820pF, 8200pF
+9.1pF, 91pF, 910pF, 9100pF #generics #CommonPartsLibrary",""
+"C3","","1","","A generic fixed capacitor ideal for rapid circuit topology development. You can choose between polarized and non-polarized types, its symbol and the footprint will automatically adapt based on your selection. Supported options include standard SMD sizes for ceramic capacitors (e.g., 0402, 0603, 0805), SMD sizes for aluminum electrolytic capacitors, and through-hole footprints for polarized capacitors. 
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard capacitor values: 1.0pF, 10pF, 100pF, 1000pF, 0.01uF, 0.1uF, 1.0uF, 10uF, 100uF, 1000uF, 10000uF
+1.1pF, 11pF, 110pF, 1100pF
+1.2pF, 12pF, 120pF, 1200pF
+1.3pF, 13pF, 130pF, 1300pF
+1.5pF, 15pF, 150pF, 1500pF, 0.015uF, 0.15uF, 1.5uF, 15uF, 150uF, 1500uF
+1.6pF, 16pF, 160pF, 1600pF
+1.8pF, 18pF, 180pF, 1800pF
+2.0pF, 20pF, 200pF, 2000pF
+2.2pF, 22pF, 220pF, 2200pF, 0.022uF, 0.22uF, 2.2uF, 22uF, 220uF, 2200uF
+2.4pF, 24pF, 240pF, 2400pF
+2.7pF, 27pF, 270pF, 2700pF
+3.0pF, 30pF, 300pF, 3000pF
+3.3pF, 33pF, 330pF, 3300pF, 0.033uF, 0.33uF, 3.3uF, 33uF, 330uF, 3300uF
+3.6pF, 36pF, 360pF, 3600pF
+3.9pF, 39pF, 390pF, 3900pF
+4.3pF, 43pF, 430pF, 4300pF
+4.7pF, 47pF, 470pF, 4700pF, 0.047uF, 0.47uF, 4.7uF, 47uF, 470uF, 4700uF
+5.1pF, 51pF, 510pF, 5100pF
+5.6pF, 56pF, 560pF, 5600pF
+6.2pF, 62pF, 620pF, 6200pF
+6.8pF, 68pF, 680pF, 6800pF, 0.068uF, 0.68uF, 6.8uF, 68uF, 680uF, 6800uF
+7.5pF, 75pF, 750pF, 7500pF
+8.2pF, 82pF, 820pF, 8200pF
+9.1pF, 91pF, 910pF, 9100pF #generics #CommonPartsLibrary",""
+"D1","1N4148-1","1","","Diode Standard 75 V 200mA Through Hole DO-204AH DO-35 #CommonPartsLibrary #Diode #1N4148",""
+"J1","2222","1","","Adafruit 2222 raspberry pi header.  For use on pi hats to interface with a raspberry pi 2/3/4/4B.",""
+"J2, J3","SDS-50J","2","","5-Position DIN Circular Connector Receptacle – Right-angle PCB-mount female connector designed for signal and power connections in electronic and industrial equipment. The Same Sky SDS-50J features 5 contacts in a 180° DIN configuration, with through-hole solder termination and a push-pull locking mechanism. It is rated for 100 VAC / 24 VDC and 2 A at 100 VAC / 1 A at 24 VDC, with 30 mΩ maximum contact resistance and 50 MΩ minimum insulation resistance. The connector uses a PBT housing, tin-plated contacts, and operates from −40°C to +85°C.
+
+#SameSky #SDS50J #DINConnector #CircularConnector #PCBConnector #5Position #ThroughHole #RightAngle #PushPull #WireToBoard",""
+"R1, R2, R3, R4","","4","","A generic fixed resistor ideal for rapid circuit topology development. Its footprint automatically adapts based on the selected package case code—supporting 0402, 0603, 0805, 1203, and many other standard SMD packages, as well as axial horizontal and vertical configurations.
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard resistor values:
+1.0 ohm, 10 ohm, 100 ohm, 1.0k ohm, 10k ohm, 100k ohm, 1.0M ohm
+1.1 ohm, 11 ohm, 110 ohm, 1.1k ohm, 11k ohm, 110k ohm, 1.1M ohm
+1.2 ohm, 12 ohm, 120 ohm, 1.2k ohm, 12k ohm, 120k ohm, 1.2M ohm
+1.3 ohm, 13 ohm, 130 ohm, 1.3k ohm, 13k ohm, 130k ohm, 1.3M ohm
+1.5 ohm, 15 ohm, 150 ohm, 1.5k ohm, 15k ohm, 150k ohm, 1.5M ohm
+1.6 ohm, 16 ohm, 160 ohm, 1.6k ohm, 16k ohm, 160k ohm, 1.6M ohm
+1.8 ohm, 18 ohm, 180 ohm, 1.8K ohm, 18k ohm, 180k ohm, 1.8M ohm
+2.0 ohm, 20 ohm, 200 ohm, 2.0k ohm, 20k ohm, 200k ohm, 2.0M ohm
+2.2 ohm, 22 ohm, 220 ohm, 2.2k ohm, 22k ohm, 220k ohm, 2.2M ohm
+2.4 ohm, 24 ohm, 240 ohm, 2.4k ohm, 24k ohm, 240k ohm, 2.4M ohm
+2.7 ohm, 27 ohm, 270 ohm, 2.7k ohm, 27k ohm, 270k ohm, 2.7M ohm
+3.0 ohm, 30 ohm, 300 ohm, 3.0K ohm, 30K ohm, 300K ohm, 3.0M ohm
+3.3 ohm, 33 ohm, 330 ohm, 3.3k ohm, 33k ohm, 330k ohm, 3.3M ohm
+3.6 ohm, 36 ohm, 360 ohm, 3.6k ohm, 36k ohm, 360k ohm, 3.6M ohm
+3.9 ohm, 39 ohm, 390 ohm, 3.9k ohm, 39k ohm, 390k ohm, 3.9M ohm
+4.3 ohm, 43 ohm, 430 ohm, 4.3k ohm, 43K ohm, 430K ohm, 4.3M ohm
+4.7 ohm, 47 ohm, 470 ohm, 4.7k ohm, 47k ohm, 470k ohm, 4.7M ohm
+5.1 ohm, 51 ohm, 510 ohm, 5.1k ohm, 51k ohm, 510k ohm, 5.1M ohm
+5.6 ohm, 56 ohm, 560 ohm, 5.6k ohm, 56k ohm, 560k ohm, 5.6M ohm
+6.2 ohm, 62 ohm, 620 ohm, 6.2k ohm, 62K ohm, 620K ohm, 6.2M ohm
+6.8 ohm, 68 ohm, 680 ohm, 6.8k ohm, 68k ohm, 680k ohm, 6.8M ohm
+7.5 ohm, 75 ohm, 750 ohm, 7.5k ohm, 75k ohm, 750k ohm, 7.5M ohm
+8.2 ohm, 82 ohm, 820 ohm, 8.2k ohm, 82k ohm, 820k ohm, 8.2M ohm
+9.1 ohm, 91 ohm, 910 ohm, 9.1k ohm, 91k ohm, 910k ohm, 9.1M ohm
+
+#generics #CommonPartsLibrary",""
+"R5","","1","","A generic fixed resistor ideal for rapid circuit topology development. Its footprint automatically adapts based on the selected package case code—supporting 0402, 0603, 0805, 1203, and many other standard SMD packages, as well as axial horizontal and vertical configurations.
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard resistor values:
+1.0 ohm, 10 ohm, 100 ohm, 1.0k ohm, 10k ohm, 100k ohm, 1.0M ohm
+1.1 ohm, 11 ohm, 110 ohm, 1.1k ohm, 11k ohm, 110k ohm, 1.1M ohm
+1.2 ohm, 12 ohm, 120 ohm, 1.2k ohm, 12k ohm, 120k ohm, 1.2M ohm
+1.3 ohm, 13 ohm, 130 ohm, 1.3k ohm, 13k ohm, 130k ohm, 1.3M ohm
+1.5 ohm, 15 ohm, 150 ohm, 1.5k ohm, 15k ohm, 150k ohm, 1.5M ohm
+1.6 ohm, 16 ohm, 160 ohm, 1.6k ohm, 16k ohm, 160k ohm, 1.6M ohm
+1.8 ohm, 18 ohm, 180 ohm, 1.8K ohm, 18k ohm, 180k ohm, 1.8M ohm
+2.0 ohm, 20 ohm, 200 ohm, 2.0k ohm, 20k ohm, 200k ohm, 2.0M ohm
+2.2 ohm, 22 ohm, 220 ohm, 2.2k ohm, 22k ohm, 220k ohm, 2.2M ohm
+2.4 ohm, 24 ohm, 240 ohm, 2.4k ohm, 24k ohm, 240k ohm, 2.4M ohm
+2.7 ohm, 27 ohm, 270 ohm, 2.7k ohm, 27k ohm, 270k ohm, 2.7M ohm
+3.0 ohm, 30 ohm, 300 ohm, 3.0K ohm, 30K ohm, 300K ohm, 3.0M ohm
+3.3 ohm, 33 ohm, 330 ohm, 3.3k ohm, 33k ohm, 330k ohm, 3.3M ohm
+3.6 ohm, 36 ohm, 360 ohm, 3.6k ohm, 36k ohm, 360k ohm, 3.6M ohm
+3.9 ohm, 39 ohm, 390 ohm, 3.9k ohm, 39k ohm, 390k ohm, 3.9M ohm
+4.3 ohm, 43 ohm, 430 ohm, 4.3k ohm, 43K ohm, 430K ohm, 4.3M ohm
+4.7 ohm, 47 ohm, 470 ohm, 4.7k ohm, 47k ohm, 470k ohm, 4.7M ohm
+5.1 ohm, 51 ohm, 510 ohm, 5.1k ohm, 51k ohm, 510k ohm, 5.1M ohm
+5.6 ohm, 56 ohm, 560 ohm, 5.6k ohm, 56k ohm, 560k ohm, 5.6M ohm
+6.2 ohm, 62 ohm, 620 ohm, 6.2k ohm, 62K ohm, 620K ohm, 6.2M ohm
+6.8 ohm, 68 ohm, 680 ohm, 6.8k ohm, 68k ohm, 680k ohm, 6.8M ohm
+7.5 ohm, 75 ohm, 750 ohm, 7.5k ohm, 75k ohm, 750k ohm, 7.5M ohm
+8.2 ohm, 82 ohm, 820 ohm, 8.2k ohm, 82k ohm, 820k ohm, 8.2M ohm
+9.1 ohm, 91 ohm, 910 ohm, 9.1k ohm, 91k ohm, 910k ohm, 9.1M ohm
+
+#generics #CommonPartsLibrary",""
+"R6","","1","","A generic fixed resistor ideal for rapid circuit topology development. Its footprint automatically adapts based on the selected package case code—supporting 0402, 0603, 0805, 1203, and many other standard SMD packages, as well as axial horizontal and vertical configurations.
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard resistor values:
+1.0 ohm, 10 ohm, 100 ohm, 1.0k ohm, 10k ohm, 100k ohm, 1.0M ohm
+1.1 ohm, 11 ohm, 110 ohm, 1.1k ohm, 11k ohm, 110k ohm, 1.1M ohm
+1.2 ohm, 12 ohm, 120 ohm, 1.2k ohm, 12k ohm, 120k ohm, 1.2M ohm
+1.3 ohm, 13 ohm, 130 ohm, 1.3k ohm, 13k ohm, 130k ohm, 1.3M ohm
+1.5 ohm, 15 ohm, 150 ohm, 1.5k ohm, 15k ohm, 150k ohm, 1.5M ohm
+1.6 ohm, 16 ohm, 160 ohm, 1.6k ohm, 16k ohm, 160k ohm, 1.6M ohm
+1.8 ohm, 18 ohm, 180 ohm, 1.8K ohm, 18k ohm, 180k ohm, 1.8M ohm
+2.0 ohm, 20 ohm, 200 ohm, 2.0k ohm, 20k ohm, 200k ohm, 2.0M ohm
+2.2 ohm, 22 ohm, 220 ohm, 2.2k ohm, 22k ohm, 220k ohm, 2.2M ohm
+2.4 ohm, 24 ohm, 240 ohm, 2.4k ohm, 24k ohm, 240k ohm, 2.4M ohm
+2.7 ohm, 27 ohm, 270 ohm, 2.7k ohm, 27k ohm, 270k ohm, 2.7M ohm
+3.0 ohm, 30 ohm, 300 ohm, 3.0K ohm, 30K ohm, 300K ohm, 3.0M ohm
+3.3 ohm, 33 ohm, 330 ohm, 3.3k ohm, 33k ohm, 330k ohm, 3.3M ohm
+3.6 ohm, 36 ohm, 360 ohm, 3.6k ohm, 36k ohm, 360k ohm, 3.6M ohm
+3.9 ohm, 39 ohm, 390 ohm, 3.9k ohm, 39k ohm, 390k ohm, 3.9M ohm
+4.3 ohm, 43 ohm, 430 ohm, 4.3k ohm, 43K ohm, 430K ohm, 4.3M ohm
+4.7 ohm, 47 ohm, 470 ohm, 4.7k ohm, 47k ohm, 470k ohm, 4.7M ohm
+5.1 ohm, 51 ohm, 510 ohm, 5.1k ohm, 51k ohm, 510k ohm, 5.1M ohm
+5.6 ohm, 56 ohm, 560 ohm, 5.6k ohm, 56k ohm, 560k ohm, 5.6M ohm
+6.2 ohm, 62 ohm, 620 ohm, 6.2k ohm, 62K ohm, 620K ohm, 6.2M ohm
+6.8 ohm, 68 ohm, 680 ohm, 6.8k ohm, 68k ohm, 680k ohm, 6.8M ohm
+7.5 ohm, 75 ohm, 750 ohm, 7.5k ohm, 75k ohm, 750k ohm, 7.5M ohm
+8.2 ohm, 82 ohm, 820 ohm, 8.2k ohm, 82k ohm, 820k ohm, 8.2M ohm
+9.1 ohm, 91 ohm, 910 ohm, 9.1k ohm, 91k ohm, 910k ohm, 9.1M ohm
+
+#generics #CommonPartsLibrary",""
+"R7","","1","","A generic fixed resistor ideal for rapid circuit topology development. Its footprint automatically adapts based on the selected package case code—supporting 0402, 0603, 0805, 1203, and many other standard SMD packages, as well as axial horizontal and vertical configurations.
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard resistor values:
+1.0 ohm, 10 ohm, 100 ohm, 1.0k ohm, 10k ohm, 100k ohm, 1.0M ohm
+1.1 ohm, 11 ohm, 110 ohm, 1.1k ohm, 11k ohm, 110k ohm, 1.1M ohm
+1.2 ohm, 12 ohm, 120 ohm, 1.2k ohm, 12k ohm, 120k ohm, 1.2M ohm
+1.3 ohm, 13 ohm, 130 ohm, 1.3k ohm, 13k ohm, 130k ohm, 1.3M ohm
+1.5 ohm, 15 ohm, 150 ohm, 1.5k ohm, 15k ohm, 150k ohm, 1.5M ohm
+1.6 ohm, 16 ohm, 160 ohm, 1.6k ohm, 16k ohm, 160k ohm, 1.6M ohm
+1.8 ohm, 18 ohm, 180 ohm, 1.8K ohm, 18k ohm, 180k ohm, 1.8M ohm
+2.0 ohm, 20 ohm, 200 ohm, 2.0k ohm, 20k ohm, 200k ohm, 2.0M ohm
+2.2 ohm, 22 ohm, 220 ohm, 2.2k ohm, 22k ohm, 220k ohm, 2.2M ohm
+2.4 ohm, 24 ohm, 240 ohm, 2.4k ohm, 24k ohm, 240k ohm, 2.4M ohm
+2.7 ohm, 27 ohm, 270 ohm, 2.7k ohm, 27k ohm, 270k ohm, 2.7M ohm
+3.0 ohm, 30 ohm, 300 ohm, 3.0K ohm, 30K ohm, 300K ohm, 3.0M ohm
+3.3 ohm, 33 ohm, 330 ohm, 3.3k ohm, 33k ohm, 330k ohm, 3.3M ohm
+3.6 ohm, 36 ohm, 360 ohm, 3.6k ohm, 36k ohm, 360k ohm, 3.6M ohm
+3.9 ohm, 39 ohm, 390 ohm, 3.9k ohm, 39k ohm, 390k ohm, 3.9M ohm
+4.3 ohm, 43 ohm, 430 ohm, 4.3k ohm, 43K ohm, 430K ohm, 4.3M ohm
+4.7 ohm, 47 ohm, 470 ohm, 4.7k ohm, 47k ohm, 470k ohm, 4.7M ohm
+5.1 ohm, 51 ohm, 510 ohm, 5.1k ohm, 51k ohm, 510k ohm, 5.1M ohm
+5.6 ohm, 56 ohm, 560 ohm, 5.6k ohm, 56k ohm, 560k ohm, 5.6M ohm
+6.2 ohm, 62 ohm, 620 ohm, 6.2k ohm, 62K ohm, 620K ohm, 6.2M ohm
+6.8 ohm, 68 ohm, 680 ohm, 6.8k ohm, 68k ohm, 680k ohm, 6.8M ohm
+7.5 ohm, 75 ohm, 750 ohm, 7.5k ohm, 75k ohm, 750k ohm, 7.5M ohm
+8.2 ohm, 82 ohm, 820 ohm, 8.2k ohm, 82k ohm, 820k ohm, 8.2M ohm
+9.1 ohm, 91 ohm, 910 ohm, 9.1k ohm, 91k ohm, 910k ohm, 9.1M ohm
+
+#generics #CommonPartsLibrary",""
+"R8","","1","","A generic fixed resistor ideal for rapid circuit topology development. Its footprint automatically adapts based on the selected package case code—supporting 0402, 0603, 0805, 1203, and many other standard SMD packages, as well as axial horizontal and vertical configurations.
+
+Save precious design time by seamlessly add more information to this part (value, footprint, etc.) as it becomes available.
+
+Standard resistor values:
+1.0 ohm, 10 ohm, 100 ohm, 1.0k ohm, 10k ohm, 100k ohm, 1.0M ohm
+1.1 ohm, 11 ohm, 110 ohm, 1.1k ohm, 11k ohm, 110k ohm, 1.1M ohm
+1.2 ohm, 12 ohm, 120 ohm, 1.2k ohm, 12k ohm, 120k ohm, 1.2M ohm
+1.3 ohm, 13 ohm, 130 ohm, 1.3k ohm, 13k ohm, 130k ohm, 1.3M ohm
+1.5 ohm, 15 ohm, 150 ohm, 1.5k ohm, 15k ohm, 150k ohm, 1.5M ohm
+1.6 ohm, 16 ohm, 160 ohm, 1.6k ohm, 16k ohm, 160k ohm, 1.6M ohm
+1.8 ohm, 18 ohm, 180 ohm, 1.8K ohm, 18k ohm, 180k ohm, 1.8M ohm
+2.0 ohm, 20 ohm, 200 ohm, 2.0k ohm, 20k ohm, 200k ohm, 2.0M ohm
+2.2 ohm, 22 ohm, 220 ohm, 2.2k ohm, 22k ohm, 220k ohm, 2.2M ohm
+2.4 ohm, 24 ohm, 240 ohm, 2.4k ohm, 24k ohm, 240k ohm, 2.4M ohm
+2.7 ohm, 27 ohm, 270 ohm, 2.7k ohm, 27k ohm, 270k ohm, 2.7M ohm
+3.0 ohm, 30 ohm, 300 ohm, 3.0K ohm, 30K ohm, 300K ohm, 3.0M ohm
+3.3 ohm, 33 ohm, 330 ohm, 3.3k ohm, 33k ohm, 330k ohm, 3.3M ohm
+3.6 ohm, 36 ohm, 360 ohm, 3.6k ohm, 36k ohm, 360k ohm, 3.6M ohm
+3.9 ohm, 39 ohm, 390 ohm, 3.9k ohm, 39k ohm, 390k ohm, 3.9M ohm
+4.3 ohm, 43 ohm, 430 ohm, 4.3k ohm, 43K ohm, 430K ohm, 4.3M ohm
+4.7 ohm, 47 ohm, 470 ohm, 4.7k ohm, 47k ohm, 470k ohm, 4.7M ohm
+5.1 ohm, 51 ohm, 510 ohm, 5.1k ohm, 51k ohm, 510k ohm, 5.1M ohm
+5.6 ohm, 56 ohm, 560 ohm, 5.6k ohm, 56k ohm, 560k ohm, 5.6M ohm
+6.2 ohm, 62 ohm, 620 ohm, 6.2k ohm, 62K ohm, 620K ohm, 6.2M ohm
+6.8 ohm, 68 ohm, 680 ohm, 6.8k ohm, 68k ohm, 680k ohm, 6.8M ohm
+7.5 ohm, 75 ohm, 750 ohm, 7.5k ohm, 75k ohm, 750k ohm, 7.5M ohm
+8.2 ohm, 82 ohm, 820 ohm, 8.2k ohm, 82k ohm, 820k ohm, 8.2M ohm
+9.1 ohm, 91 ohm, 910 ohm, 9.1k ohm, 91k ohm, 910k ohm, 9.1M ohm
+
+#generics #CommonPartsLibrary",""
+"RV1, RV10, RV2, RV3, RV4, RV5, RV6, RV7, RV8, RV9","PDB181-P415K-103B","10","","10k Ohm 1 Gang Linear Panel Mount Potentiometer 1.0 Turns Carbon 0.2W, 1/5W PC Pins #commonpartslibrary
+#potentiometer
+",""
+"SW1, SW2, SW3, SW4","MX2A-LC3W","4","","Cherry MX Orange MX2A-LC3W Silent Switch Pushbutton Switch SPST-NO Keyswitch Through Hole 
+This switch is used in keyboards like: 
+Planck 
+Vortexgear
+KBD67
+ErgoDox
+leopold 
+WorkLouder
+Varmilo 
+Ducky
+Durgod 
+Mistel 
+Keebio Iris
+iKBC 
+WASD 
+Keychron
+Filco
+and many others
+#Cherry #CherryMX ",""
+"U1, U2","MCP3008-I/P","2","","10 Bit Analog to Digital Converter IC 8 Input 1 SAR 16-DIP #commonpartslibrary
+#integratedcircuit
+#analog
+#digital
+#converter",""
+"U3","H11L1M","1","","Logic Output Optoisolator 1MHz Open Collector 4170Vrms 1 Channel CMTI 6-DIP
+
+Schmitt trigger output optocoupler that provides high-speed optical isolation using a gallium-arsenide infrared LED and an integrated Schmitt trigger detector with open-collector output. The H11L1M operates from a 3–15 V supply, has a 1.6 mA maximum turn-on threshold current, supports a typical 1 MHz data rate, and provides 4,170 VACRMS input-to-output isolation in a 6-pin DIP package. #Optocoupler #SchmittTrigger #OpticalIsolation #onsemi #H11L1M",""
